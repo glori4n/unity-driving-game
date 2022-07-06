@@ -42,6 +42,8 @@ public class Driver : MonoBehaviour
             actualSpeed = moveSpeed;
         }
 
+        // text = string.Format("{0:00}", timer);
+
         moveAmount = Input.GetAxis("Vertical") * actualSpeed * Time.deltaTime;
         steerAmount = Input.GetAxis("Horizontal") * steerSpeed * Time.deltaTime;
 
@@ -53,6 +55,7 @@ public class Driver : MonoBehaviour
         if (other.tag == "Boost")
         {
             isBoosted = true;
+            isSlowed = false;
             timer = 7;
             Destroy(other.gameObject, 0.1f);
         }
@@ -61,6 +64,7 @@ public class Driver : MonoBehaviour
     private void OnCollisionEnter2D(Collision2D other) 
     {
         isSlowed = true;
+        isBoosted = false;
         timer = 7;
         Debug.Log("I bumped into something.");
     }
